@@ -11,31 +11,37 @@ import { APP_ROUTING } from './pages/app.routes';
 import { NavbarComponent } from './ui/navbar/navbar.component';
 import { FooterComponent } from './ui/footer/footer.component';
 
-// Services 
-import { MovieService } from './services/movie.service';
-import { FavoritesService} from './services/favorites.service';
+// Pipes
+import { PhotoMoviePipe } from './pipes/photo.pipe.';
 // HTTP
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
+// Form module
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MovieCardComponent } from './pages/movies/movie-card/movie-card.component';
+import { SerieCardComponent } from './pages/series/serie-card/serie-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PhotoMoviePipe,
     MoviesComponent,
     SeriesComponent,
     FavoritesComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    MovieCardComponent,
+    SerieCardComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     APP_ROUTING,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    MovieService,
-    FavoritesService
     ],
   bootstrap: [AppComponent]
 })

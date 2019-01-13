@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import {environment} from './../../environments/environment';
-import { of } from "rxjs/observable/of";
+import {environment} from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,29 +18,29 @@ export class MovieService {
                  '2017', '2018'];
   
   constructor(private http: HttpClient) { 
-    this.params = new HttpParams().set('include_video',true).set('api_key', 'a1d5fa35e02203e65e413e3e806bcd1d');
+    this.params = new HttpParams().set('include_video','true');
   }
   
-  getMovies(){
-    return this.http.get(`${environment.base_api}discover/movie`, {params: this.params});
+  getMovies(genre:string = '', year:string=''){
+    let newGenre = new HttpParams().set('with_genres', genre).set('year', year);
+    return this.http.get<any>(`${environment.base_api}discover/movie`, {params: newGenre});
   }
   
   getGenres(){
-    return this.http.get(`${environment.base_api}genre/movie/list`, {params: this.params});
+    return this.http.get<any>(`${environment.base_api}genre/movie/list`, {params: this.params});
   }
   
   getYears(){
     return this.years;
   }
   
-  searchMovie(term: string): Observable<any[]>{
+  searchMovie(term: string): Observable<any>{
     if(term){
       console.log(term);
-      let newParams = new HttpParams().set('query',term).set('api_key', 'a1d5fa35e02203e65e413e3e806bcd1d');
-      return this.http.get(`${environment.base_api}search/movie`, {params:newParams});
-    };
+      let newParams = new HttpParams().set('query',term);
+      return this.http.get<any>(`${environment.base_api}search/movie`, {params:newParams});
+    }
     else {
-      console.log('return');
       return this.getMovies();
     }
   }

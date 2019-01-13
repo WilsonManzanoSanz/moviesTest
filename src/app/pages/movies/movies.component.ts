@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from '../../services/movie.service';
-import { FavoritesService} from '../../services/favorites.service';
+import { MovieService } from '../../services/movies/movie.service';
 import { Observable, Subject } from 'rxjs';
 import {
    debounceTime, distinctUntilChanged, switchMap
@@ -13,10 +12,15 @@ import {
 })
 export class MoviesComponent implements OnInit {
   
+  public years = [];
+  public genres = [];
   public movies = [];
+  public selectedGenre;
+  public selectedYear;
+  public searchQuery;
   public searchTerms = new Subject<string>();
   
-  constructor(private movieService: MovieService, private favoriteService:FavoritesService) {
+  constructor(private movieService: MovieService) {
   }
 
   ngOnInit() {
@@ -37,22 +41,26 @@ export class MoviesComponent implements OnInit {
         })
     ).subscribe(
         data => {
-          this.movies = data['results'].map(value => {
-            value.poster_path = 'https://image.tmdb.org/t/p/w500' + value.poster_path;
-            return value;
-          })
-        }, 
-        error => console.error(error)
+          this.selectedGenre = '';
+          this.selectedYear = '';
+          this.movies = data['results'];
+        }
     );
   }
   
   getMovies(){
     this.movieService.getMovies().subscribe(
       response => {
-        this.movies = response['results'].map(value => {
-          value.poster_path = 'https://image.tmdb.org/t/p/w500' + value.poster_path;
-          return value;
-        })
+        this.movies = response['results'];
+      },
+      error => console.error(error)); 
+  }
+
+  filterMovie(value){
+    this.searchQuery = '';
+    this.movieService.getMovies(this.selectedGenre, this.selectedYear).subscribe(
+      response => {
+        this.movies = response['results'];
       },
       error => console.error(error)); 
   }
@@ -72,10 +80,6 @@ export class MoviesComponent implements OnInit {
   
   searchMovie(term: string): void {
     this.searchTerms.next(term);
-  }
-  
-  addNewFavorite(movie){
-    console.log(this.favoriteService.addFavorite(movie));
   }
     /*
     this.searchMovies.searchMovie().subscribe(

@@ -1,3 +1,33 @@
-<p>
-  series works!
-</p>
+<div class="container">
+    <div>
+        <input [(ngModel)]="searchQuery" class="full-width search-input" input="text" placeholder="  Search series" (keyup)="searchSeries($event.target.value)">
+    </div>
+    <h2 style="margin-left: 20px;">
+        Find new series
+    </h2>
+    <div class="flex" style="margin-left: 20px;">
+        <div>
+            <div>
+                Genre
+            </div>
+            <select [(ngModel)]="selectedGenre" (change)="filterSerie(selectedGenre)">
+        <option [value]="''">Not set</option>
+        <option *ngFor="let genre of genres;" [value]="genre.id">{{genre.name}}</option>
+      </select>
+        </div>
+        <div>
+            <div>
+                Year
+            </div>
+            <select [(ngModel)]="selectedYear" (change)="filterSerie(selectedYear)">
+        <option  [value]="''">Not set</option>
+        <option *ngFor="let year of years;" [value]="year">{{year}}</option>
+      </select>
+        </div>
+    </div>
+    <div class="flex" style="flex-wrap:wrap;  justify-content: center;">
+        <div class="card card-series flex" *ngFor="let serie of series; let i = index;" style="flex-direction:row;">
+            <app-serie-card [serie]="serie"></app-serie-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="flex card">
+    <div>
+        <img [src]="serie.poster_path | photoFormat" alt="serie photo" class="image-card">
+    </div>
+    <div style="padding:0px 20px;">
+        <div class="flex">
+            <p>{{serie.name}}</p>
+            <span class="spacer"></span>
+            <span>{{serie.vote_average}}</span>
+        </div>
+        <span>{{serie.first_air_date}} |</span>
+        <span>{{serie.genre_ids}}</span>
+        <div class="flex" style="flex-flow: column; height: 200px;">
+            <p>
+                {{serie.overview | slice:0:240}}...
+            </p>
+            <div class="spacer"></div>
+            <div class="flex">
+                <button class="raised">
+                  Ver Trailer
+                </button>
+                <span class="spacer"></span>
+                <span (click)="addNewFavorite(serie)"> Agregar a favoritos <i class="material-icons">favorite</i></span>
+                <!--<span (click)="removeFavorite(i)" style="color:red;"> Remover de favoritos <i class="material-icons">favorite</i></span>-->
+            </div>
+        </div>
+    </div>
+</div>

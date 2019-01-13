@@ -1,53 +1,33 @@
 <div class="container">
-  <div>
-    <input class="full-width search-input" input="text" placeholder="Search movies"  (keyup)="searchMovie($event.target.value)"> 
-  </div>
-  <h2>
-    Descubra nuevas películas 
-  </h2>
-  <div class="flex">
     <div>
-      <div>
-        Genero
-      </div>
-      <select>
-        <option *ngFor="let genre of genres;" value="{{genre.id}}">{{genre.name}}</option>
+        <input [(ngModel)]="searchQuery" class="full-width search-input" input="text" placeholder=" Search movies" (keyup)="searchMovie($event.target.value)">
+    </div>
+    <h2 style="margin-left: 20px;">
+        Find new películas
+    </h2>
+    <div class="flex" style="margin-left: 20px;">
+        <div>
+            <div>
+                Genre
+            </div>
+            <select [(ngModel)]="selectedGenre" (change)="filterMovie(selectedGenre)">
+        <option [value]="''">Not set</option>
+        <option *ngFor="let genre of genres;" [value]="genre.id">{{genre.name}}</option>
       </select>
-    </div>
-    <div>
-      <div>
-        Año
-      </div>
-      <select>
-        <option *ngFor="let year of years;" value="{{year}}">{{year}}</option>
+        </div>
+        <div>
+            <div>
+                Year
+            </div>
+            <select [(ngModel)]="selectedYear" (change)="filterMovie(selectedYear)">
+        <option  [value]="''">Not set</option>
+        <option *ngFor="let year of years;" [value]="year">{{year}}</option>
       </select>
-    </div>
-  </div>
-  <div class="flex" style="flex-wrap:wrap;  justify-content: center;">
-    <div class="card card-movies flex" *ngFor="let movie of movies; let i = index;" style="flex-direction:row;">
-     <div>
-       <img src={{movie.poster_path}} alt="movie photo" class="image-card">
-      </div>
-      <div style="padding:0px 20px;">
-        <div class="flex">
-          <p>{{movie.title}}</p>
-          <span class="spacer"></span>
-          <span>{{movie.vote_average}}</span>
         </div>
-        <span>{{movie.release_date}} |</span>
-        <span>{{movie.genre_ids}}</span>
-        <p>
-          {{movie.overview | slice:0:280}}...
-        </p>
-        <div class="flex"> 
-          <button class="raised">
-          Ver Trailer
-          </button>
-          <span class="spacer"></span>
-          <span (click)="addNewFavorite(movie)"> Agregar a favoritos <i class="material-icons">favorite</i></span>
-          <!--<span (click)="removeFavorite(i)" style="color:red;"> Remover de favoritos <i class="material-icons">favorite</i></span>-->
-        </div>
-      </div>
     </div>
-  </div>
+    <div class="flex card-content">
+        <div class="card-movies flex" *ngFor="let movie of movies; let i = index;" style="flex-direction:row;">
+            <app-movie-card [movie]="movie"></app-movie-card>
+        </div>
+    </div>
 </div>

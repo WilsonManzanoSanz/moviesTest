@@ -1,26 +1,22 @@
-.card-movies{
-  width:40%;
-  margin:20px;
-  padding:0px;
+.search-input {
+    background-color: gray;
+    color: white;
+    padding: 10px 0px;
+    margin: 10px 0px;
 }
 
-.image-card{
-  max-height:300px;
+.search-input::placeholder {
+    color: white;
 }
 
 @media only screen and (max-width: 700px) {
-  .card-movies{
-   width:90%;
-  }
+    .card-movies {
+        width: 90%;
+    }
 }
 
-.search-input{
-  background-color:gray;
-  color:white;
-  padding: 10px 0px;
-  margin: 10px 0px;
-}
-
-.search-input::placeholder{
-  color:white;
+.card-movies {
+    width: 45%;
+    margin: 20px;
+    padding: 0px;
 }
