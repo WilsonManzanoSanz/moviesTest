@@ -5,6 +5,11 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.paginator{
+  display: flex;
+  justify-content: center;
+}
+
 .container {
     width: 100%;
 }

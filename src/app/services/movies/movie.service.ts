@@ -21,8 +21,8 @@ export class MovieService {
     this.params = new HttpParams();
   }
   
-  getMovies(genre:string = '', year:string=''){
-    let newGenre = new HttpParams().set('with_genres', genre).set('year', year);
+  getMovies(page:number = 1 ,genre:string = '', year:string=''){
+    let newGenre = new HttpParams().set('page':String(page)).set('with_genres', genre).set('year', year);
     return this.http.get<any>(`${environment.base_api}discover/movie`, {params: newGenre});
   }
   
@@ -34,10 +34,10 @@ export class MovieService {
     return this.years;
   }
   
-  searchMovie(term: string): Observable<any>{
+  searchMovie(term: string, page:number = 1): Observable<any>{
     if(term){
       console.log(term);
-      let newParams = new HttpParams().set('query',term);
+      let newParams = new HttpParams().set('query',term).set('page', String(page));
       return this.http.get<any>(`${environment.base_api}search/movie`, {params:newParams});
     }
     else {

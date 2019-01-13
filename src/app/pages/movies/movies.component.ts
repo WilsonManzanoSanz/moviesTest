@@ -17,7 +17,7 @@ export class MoviesComponent implements OnInit {
   public movies = [];
   public selectedGenre = '';
   public selectedYear= '';
-  public searchQuery;
+  public searchQuery = '';
   public actualPage:number;
   public lastPage:number;
   public pages:any[] = [];
@@ -43,16 +43,20 @@ export class MoviesComponent implements OnInit {
           return this.movieService.searchMovie(term);
         })
     ).subscribe(
-        data => {
+        response => {
           this.selectedGenre = '';
           this.selectedYear = '';
-          this.movies = data['results'];
+          this.movies = response['results'];
+          this.actualPage = response.page;
+          this.lastPage = response.total_pages;
+          this.addPages();
         }
     );
   }
   
-  getMovies(page = 1, genre = '', year = ''){
-    this.movieService.getMovies(page, genre, year).subscribe(
+  getMovies(page = 1){
+    this.searchQuery = '';
+    this.movieService.getMovies(page, this.selectedGenre, this.selectedYear).subscribe(
       response => {
         this.movies = response['results'];
         this.actualPage = response.page;
@@ -64,21 +68,37 @@ export class MoviesComponent implements OnInit {
   
   addPages(){
     this.pages = [this.actualPage];
-    for (let i = this.actualPage; i > 1 && i < this.actualPage-4; i--){
-      this.pages.push(this.actualPage - i);
+    let x = 0;
+    for (let i = this.actualPage-1; i > 1 && x < 4; i--){
+      x++;
+      this.pages.push(i);
     }
-    for (let i = 1; i <  5 && i < this.lastPage;i++){
+    this.pages.reverse();
+    let y = this.actualPage;
+    for (let i = 1; i <  4 && y < this.lastPage;i++){
+      y++;
       this.pages.push(this.actualPage + i);
     }
     if(this.pages[0]!== 1){
       this.pages.unshift(1); 
     }
-    this.pages.push(this.lastPage);
+    //this.pages.push(this.lastPage);
   }
   
   changePage(idx){
-    if(this.searchQuery === ''){
-      this.getMovies()
+    if(!this.searchQuery && this.actualPage !== idx){
+      this.getMovies(idx);
+      window.scrollBy(0, 100);
+    } else {
+       this.movieService.searchMovie(this.searchQuery, idx).subscribe(
+         response => { this.selectedGenre = '';
+            this.selectedYear = '';
+            this.movies = response['results'];
+            this.actualPage = response.page;
+            this.lastPage = response.total_pages;
+            this.addPages();
+         }, 
+        error => console.error(error));
     }
   }
   

@@ -10,7 +10,7 @@
             <div>
                 Genre
             </div>
-            <select [(ngModel)]="selectedGenre" (change)="getMovies(selectedGenre)">
+            <select [(ngModel)]="selectedGenre" (change)="getMovies()">
         <option [value]="''" selected="selected">Not set</option>
         <option *ngFor="let genre of genres;" [value]="genre.id">{{genre.name}}</option>
       </select>
@@ -19,7 +19,7 @@
             <div>
                 Year
             </div>
-            <select [(ngModel)]="selectedYear" (change)="getMovies(selectedYear)">
+            <select [(ngModel)]="selectedYear" (change)="getMovies()">
         <option  [value]="''" selected="selected">Not set</option>
         <option *ngFor="let year of years;" [value]="year">{{year}}</option>
       </select>
@@ -29,8 +29,8 @@
         <div class="card-movies flex" *ngFor="let movie of movies; let i = index;" style="flex-direction:row;">
             <app-movie-card [movie]="movie"></app-movie-card>
         </div>
-        <div class="paginator" style="padding:20px">
-          <span class="card pointer" (click)="changePage(idx)" *ngFor="let page of pages;">{{page}}</span>
-      </div>
+    </div>
+    <div class="paginator" style="padding:20px">
+      <span class="card pointer" (click)="changePage(page)" *ngFor="let page of pages;">{{page}}</span>
     </div>
 </div>
