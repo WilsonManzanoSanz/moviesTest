@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+/*import { Pipe, PipeTransform } from '@angular/core';
 /*
  * Raise the value exponentially
  * Takes an exponent argument that defaults to 1.
@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  * Example:
  *   {{ 2 | exponentialStrength:10 }}
  *   formats to: 1024
-*/
+
 let genres = [];
 @Pipe({name: 'photoFormat'})
 export class PhotoMoviePipe implements PipeTransform {
@@ -21,4 +21,4 @@ export class PhotoMoviePipe implements PipeTransform {
     });
     return newArray;
   }
-}
+}*/

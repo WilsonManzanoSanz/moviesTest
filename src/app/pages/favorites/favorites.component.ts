@@ -8,8 +8,9 @@ import {FavoritesService} from '../../services/favorites/favorites.service';
 })
 export class FavoritesComponent implements OnInit {
 
-  public movies:any;
-  public series:any;
+  public movies:any[];
+  public series:any[];
+  public searchQuery:string;
   
   constructor(private favoriteService:FavoritesService) { }
 
