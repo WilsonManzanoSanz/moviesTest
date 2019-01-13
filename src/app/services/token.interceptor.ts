@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('interceptor');
     const intercepted = request.clone({setParams: {['api_key']:'a1d5fa35e02203e65e413e3e806bcd1d'}});
     return next.handle(intercepted);
   }

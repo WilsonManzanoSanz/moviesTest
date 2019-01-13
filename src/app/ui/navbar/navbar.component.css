@@ -6,7 +6,7 @@
 
 .header-nav{
   padding:10px;
-  font-size: larger;
+  font-size: 1.5em;
   font-weight: 900;
   display:inline-block;
 }
@@ -17,6 +17,7 @@
 }
 
 .active-link{
+  color:rgb(0,189,255);
   border: none;
   border-bottom: 1px solid rgb(0,189,255);
 }

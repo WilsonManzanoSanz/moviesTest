@@ -13,11 +13,15 @@ export class SerieCardComponent implements OnInit {
 
   @Input() serie:any;
   selectedFavorite: boolean = false;
+  videoLink:any;
+  showTrailer:boolean;
+  
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.changeView();
   }
   isMobile = window.matchMedia( "(max-width: 1025px)" );
+  
   constructor(private favoriteService:FavoritesService, public domSanitizer:DomSanitizer, private serieService:SerieService) { }
 
   ngOnInit() {

@@ -1,16 +1,6 @@
-.search-input {
-    background-color: gray;
-    color: white;
-    padding: 10px 0px;
-    margin: 10px 0px;
-}
-
-.search-input::placeholder {
-    color: white;
-}
-
-@media only screen and (max-width: 700px) {
+/*@media only screen and (max-width: 700px) {
     .card-movies {
         width: 90%;
     }
 }
+*/

@@ -44,12 +44,9 @@ export class MoviesComponent implements OnInit {
         })
     ).subscribe(
         response => {
-          this.selectedGenre = '';
-          this.selectedYear = '';
           this.movies = response['results'];
-          this.actualPage = response.page;
-          this.lastPage = response.total_pages;
-          this.addPages();
+          this.addPages(response);
+          this.cleanFilters();
         }
     );
   }
@@ -59,14 +56,14 @@ export class MoviesComponent implements OnInit {
     this.movieService.getMovies(page, this.selectedGenre, this.selectedYear).subscribe(
       response => {
         this.movies = response['results'];
-        this.actualPage = response.page;
-        this.lastPage = response.total_pages;
-        this.addPages();
+        this.addPages(response);
       },
       error => console.error(error)); 
   }
   
-  addPages(){
+  addPages(response){
+    this.actualPage = response.page;
+    this.lastPage = response.total_pages;
     this.pages = [this.actualPage];
     let x = 0;
     for (let i = this.actualPage-1; i > 1 && x < 4; i--){
@@ -88,15 +85,13 @@ export class MoviesComponent implements OnInit {
   changePage(idx){
     if(!this.searchQuery && this.actualPage !== idx){
       this.getMovies(idx);
-      window.scrollBy(0, 100);
+      document.getElementById('navbar').scrollIntoView();
     } else {
        this.movieService.searchMovie(this.searchQuery, idx).subscribe(
-         response => { this.selectedGenre = '';
-            this.selectedYear = '';
+         response => { 
             this.movies = response['results'];
-            this.actualPage = response.page;
-            this.lastPage = response.total_pages;
-            this.addPages();
+            this.addPages(response);
+            this.cleanFilters();
          }, 
         error => console.error(error));
     }
@@ -125,6 +120,11 @@ export class MoviesComponent implements OnInit {
   
   searchMovie(term: string): void {
     this.searchTerms.next(term);
+  }
+  
+  cleanFilters(){
+    this.selectedGenre = '';
+    this.selectedYear = '';
   }
     /*
     this.searchMovies.searchMovie().subscribe(

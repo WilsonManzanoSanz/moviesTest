@@ -21,8 +21,8 @@ export class SerieService {
     this.params = new HttpParams().set('include_video','true');
   }
   
-  getSeries(genre:string = '', year:string=''){
-    let newGenre = new HttpParams().set('with_genres', genre).set('first_air_date_year', year);
+  getSeries(page:number = 1 ,genre:string = '', year:string=''){
+    let newGenre = new HttpParams().set('with_genres', genre).set('first_air_date_year', year).set('page',String(page));
     return this.http.get<any>(`${environment.base_api}discover/tv`, {params: newGenre});
   }
   
@@ -34,10 +34,10 @@ export class SerieService {
     return this.years;
   }
   
-  searchSerie(term: string): Observable<any>{
+  searchSerie(term: string, page:number = 1): Observable<any>{
     if(term){
       console.log(term);
-      let newParams = new HttpParams().set('query',term);
+      let newParams = new HttpParams().set('query',term).set('page', String(page));
       return this.http.get<any>(`${environment.base_api}search/tv`, {params:newParams});
     }
     else {

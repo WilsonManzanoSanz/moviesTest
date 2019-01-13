@@ -22,7 +22,7 @@ export class MovieService {
   }
   
   getMovies(page:number = 1 ,genre:string = '', year:string=''){
-    let newGenre = new HttpParams().set('page':String(page)).set('with_genres', genre).set('year', year);
+    let newGenre = new HttpParams().set('page',String(page)).set('with_genres', genre).set('year', year);
     return this.http.get<any>(`${environment.base_api}discover/movie`, {params: newGenre});
   }
   

@@ -17,7 +17,10 @@ export class SeriesComponent implements OnInit {
   public series = [];
   public selectedGenre = '';
   public selectedYear = '';
-  public searchQuery;
+  public searchQuery = '';
+  public actualPage:number;
+  public lastPage:number;
+  public pages:any[] = [];
   public searchTerms = new Subject<string>();
   
   constructor(private serieService: SerieService) {
@@ -40,23 +43,25 @@ export class SeriesComponent implements OnInit {
           return this.serieService.searchSerie(term);
         })
     ).subscribe(
-        data => {
-          this.selectedGenre = '';
-          this.selectedYear = '';
-          this.series = data['results'];
+        response => {
+          this.series = response['results'];
+          this.addPages(response);
+          this.cleanFilters();
         }
     );
   }
   
-  getSeries(){
-    this.serieService.getSeries().subscribe(
+  getSeries(page = 1){
+    this.searchQuery = '';
+    this.serieService.getSeries(page, this.selectedGenre, this.selectedYear).subscribe(
       response => {
         this.series = response['results'];
+        this.addPages(response);
       },
       error => console.error(error)); 
   }
 
-  filterSerie(value){
+  /*filterSerie(value){
     this.searchQuery = '';
     this.serieService.getSeries(this.selectedGenre, this.selectedYear).subscribe(
       response => {
@@ -64,7 +69,7 @@ export class SeriesComponent implements OnInit {
       },
       error => console.error(error)); 
   }
-  
+  */
   getYears(){
     this.years = this.serieService.getYears();
   }
@@ -80,6 +85,47 @@ export class SeriesComponent implements OnInit {
   
   searchSeries(term: string): void {
     this.searchTerms.next(term);
+  }
+  
+  addPages(response){
+    this.actualPage = response.page;
+    this.lastPage = response.total_pages;
+    this.pages = [this.actualPage];
+    let x = 0;
+    for (let i = this.actualPage-1; i > 1 && x < 4; i--){
+      x++;
+      this.pages.push(i);
+    }
+    this.pages.reverse();
+    let y = this.actualPage;
+    for (let i = 1; i <  4 && y < this.lastPage;i++){
+      y++;
+      this.pages.push(this.actualPage + i);
+    }
+    if(this.pages[0]!== 1){
+      this.pages.unshift(1); 
+    }
+    //this.pages.push(this.lastPage);
+  }
+  
+  changePage(idx){
+    if(!this.searchQuery && this.actualPage !== idx){
+      this.getSeries(idx);
+      document.getElementById('navbar').scrollIntoView();
+    } else {
+       this.serieService.searchSerie(this.searchQuery, idx).subscribe(
+         response => { 
+            this.series = response['results'];
+            this.addPages(response);
+            this.cleanFilters();
+         }, 
+        error => console.error(error));
+    }
+  }
+  
+  cleanFilters(){
+    this.selectedGenre = '';
+    this.selectedYear = '';
   }
     /*
     this.searchSeries.searchSerie().subscribe(

@@ -1,19 +1,19 @@
 <div class="flex card">
     <div>
         <img [src]="serie.poster_path | photoFormat" alt="serie photo" class="image-card">
-       <span class="pointer" (click)="addNewFavorite(movie)" [style.color]="selectedFavorite ? 'red' : black"  *ngIf="isMobile.matches"> Add to favorites<i class="material-icons">favorite</i></span>
+       <span class="pointer dark-gray" (click)="addNewFavorite(movie)" [style.color]="selectedFavorite ? 'red' : black"  *ngIf="isMobile.matches"> Add to favorites<i class="material-icons">favorite</i></span>
     </div>
     <div style="padding:0px 20px;">
         <div class="flex">
-            <p>{{serie.name}}</p>
+            <h2 class="dark-gray" style="margin-bottom: 0px;">{{serie.name}}</h2>
             <span class="spacer"></span>
-            <span>{{serie.vote_average}}</span>
+            <span class="dark-gray">{{serie.vote_average}}</span>
         </div>
-        <span>{{serie.first_air_date | date:mediumDate}}</span>
+        <span class="gray">{{serie.first_air_date | date:mediumDate}}</span>
         <!--<span>{{serie.genre_ids}}</span>-->
         <div class="flex" style="flex-flow: column; height: 200px;">
-            <p>
-                 {{isMobile.matches ? (serie.overview | slice:0:60): (serie.overview | slice:0:240)}}...
+            <p class="dark-gray">
+                 {{isMobile.matches ? (serie.overview | slice:0:60): (serie.overview | slice:0:180)}}...
             </p>
             <div class="spacer"></div>
             <div class="flex">
@@ -21,7 +21,7 @@
                   Trailer
                 </button>
                 <span class="spacer"></span>
-                <span class="pointer" [style.color]="selectedFavorite ? 'red' : black"  (click)="addNewFavorite(serie)" *ngIf="!isMobile.matches"> Agregar a favoritos <i class="material-icons">favorite</i></span>
+                <span class="pointer dark-gray" [style.color]="selectedFavorite ? 'red' : black"  (click)="addNewFavorite(serie)" *ngIf="!isMobile.matches"> Agregar a favoritos <i class="material-icons">favorite</i></span>
                 <!--<span (click)="removeFavorite(i)" style="color:red;"> Remover de favoritos <i class="material-icons">favorite</i></span>-->
             </div>
         </div>

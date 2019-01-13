@@ -13,6 +13,7 @@ import { FooterComponent } from './ui/footer/footer.component';
 
 // Pipes
 import { PhotoMoviePipe } from './pipes/photo.pipe.';
+import {FilterPipe} from './pipes/filter.pipe';
 // HTTP
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
@@ -25,6 +26,7 @@ import { SerieCardComponent } from './pages/series/serie-card/serie-card.compone
   declarations: [
     AppComponent,
     PhotoMoviePipe,
+    FilterPipe,
     MoviesComponent,
     SeriesComponent,
     FavoritesComponent,

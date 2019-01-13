@@ -1,25 +1,25 @@
 <div class="flex card">
     <div>
         <img [src]="movie.poster_path | photoFormat" alt="movie photo" class="image-card">
-        <span class="pointer" (click)="addNewFavorite(movie)" [style.color]="selectedFavorite ? 'red' : black"  *ngIf="isMobile.matches"> Add to favorites<i class="material-icons">favorite</i></span>
+        <span class="pointer dark-gray" (click)="addNewFavorite(movie)" [style.color]="selectedFavorite ? 'red' : black"  *ngIf="isMobile.matches"> Add to favorites<i class="material-icons">favorite</i></span>
     </div>
     <div style="padding:0px 20px;">
         <div class="flex">
-            <p>{{movie.title}}</p>
+            <h2 class="dark-gray" style="margin-bottom: 0px;">{{movie.title}}</h2>
             <span class="spacer"></span>
-            <span>{{movie.vote_average}}</span>
+            <span class="dark-gray">{{movie.vote_average}}</span>
         </div>
-        <span>{{movie.release_date | date:mediumDate}}</span>
+        <span class="gray">{{movie.release_date | date:mediumDate}}</span>
         <!--<span>{{movie.genre_ids}}</span>> -->
         <div class="flex" style="flex-flow: column; height: 200px;">
-            <p>
-                {{isMobile.matches ? (movie.overview | slice:0:40): (movie.overview | slice:0:140)}}...
+            <p class="dark-gray">
+                {{isMobile.matches ? (movie.overview | slice:0:60): (movie.overview | slice:0:180)}}...
             </p>
             <div class="spacer"></div>
             <div class="flex">
                 <button class="raised" (click)="showVideo()"> Trailer</button>
                 <span class="spacer"></span>
-                <span class="pointer" [style.color]="selectedFavorite ? 'red' : black"  (click)="addNewFavorite(movie)" *ngIf="!isMobile.matches"> Add to favorites <i class="material-icons">favorite</i></span>
+                <span class="pointer dark-gray" [style.color]="selectedFavorite ? 'red' : black"  (click)="addNewFavorite(movie)" *ngIf="!isMobile.matches"> Add to favorites <i class="material-icons">favorite</i></span>
                 <!--<span (click)="removeFavorite(i)" style="color:red;"> Remover de favoritos <i class="material-icons">favorite</i></span>-->
             </div>
         </div>
@@ -29,14 +29,21 @@
 <div class="overlay" *ngIf="showTrailer">
   <div>
     <div class="card">
-    <div class="flex">
-      <span></span>
-      <span class="spacer"></span>
-      <i class="material-icons pointer" style="font-size:60px;color:white;" (click)="closeVideo()">close</i>
-    </div>
-    <iframe width="100%" height="400px" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
-      [src]="domSanitizer.bypassSecurityTrustResourceUrl(videoLink)">
-    </iframe>
+      <div class="flex">
+        <span></span>
+        <span class="spacer"></span>
+        <i class="material-icons pointer" style="font-size:60px;color:white;" (click)="closeVideo()">close</i>
+      </div>
+      <div *ngIf="videoLink">
+         <iframe  width="100%" height="400px" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
+          [src]="domSanitizer.bypassSecurityTrustResourceUrl(videoLink)">
+        </iframe>
+      </div>
+      <div class="card" *ngIf="!videoLink">
+          <h1 style="color:red">
+            No video available
+          </h1>
+        </div>  
     </div>
   </div>
 </div>

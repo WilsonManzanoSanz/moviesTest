@@ -2,24 +2,24 @@
     <div>
         <input [(ngModel)]="searchQuery" class="full-width search-input" input="text" placeholder=" Search movies" (keyup)="searchMovie($event.target.value)">
     </div>
-    <h2 style="margin-left: 20px;">
-        Find new movies
+    <h2 class="dark-gray" style="margin-left: 60px;">
+        Find any movies you like
     </h2>
-    <div class="flex" style="margin-left: 20px;">
+    <div class="flex" style="margin-left: 60px;">
         <div>
             <div>
-                Genre
+                <span class="dark-gray" >Genre</span>
             </div>
-            <select [(ngModel)]="selectedGenre" (change)="getMovies()">
+            <select [(ngModel)]="selectedGenre" (change)="getMovies()" class="dark-gray" >
         <option [value]="''" selected="selected">Not set</option>
         <option *ngFor="let genre of genres;" [value]="genre.id">{{genre.name}}</option>
       </select>
         </div>
         <div>
             <div>
-                Year
+                <span class="dark-gray" >Year</span>
             </div>
-            <select [(ngModel)]="selectedYear" (change)="getMovies()">
+            <select [(ngModel)]="selectedYear" (change)="getMovies()" class="dark-gray" >
         <option  [value]="''" selected="selected">Not set</option>
         <option *ngFor="let year of years;" [value]="year">{{year}}</option>
       </select>
@@ -28,6 +28,11 @@
     <div class="flex card-content">
         <div class="card-movies flex" *ngFor="let movie of movies; let i = index;" style="flex-direction:row;">
             <app-movie-card [movie]="movie"></app-movie-card>
+        </div>
+        <div class="class dark-gray" style="margin-left:60px;" *ngIf="movies.length < 1">
+          <h1>
+           Sorry no movies were found related to these criterias
+          </h1>
         </div>
     </div>
     <div class="paginator" style="padding:20px">

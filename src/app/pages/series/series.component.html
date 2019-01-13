@@ -2,37 +2,40 @@
     <div>
         <input [(ngModel)]="searchQuery" class="full-width search-input" input="text" placeholder="  Search series" (keyup)="searchSeries($event.target.value)">
     </div>
-    <h2 style="margin-left: 20px;">
-        Find new series
+    <h2 class="dark-gray" style="margin-left: 60px;">
+        Find any serie you like
     </h2>
-    <div class="flex" style="margin-left: 20px;">
+    <div class="flex" style="margin-left: 60px;">
         <div>
             <div>
-                Genre
+                <span class="dark-gray">Genre</span>
             </div>
-            <select [(ngModel)]="selectedGenre" (change)="filterSerie(selectedGenre)">
+            <select [(ngModel)]="selectedGenre" (change)="getSeries()" class="dark-gray">
         <option [value]="''" selected="selected">Not set</option>
         <option *ngFor="let genre of genres;" [value]="genre.id">{{genre.name}}</option>
       </select>
         </div>
         <div>
             <div>
-                Year
+               <span class="dark-gray">Year</span>
             </div>
-            <select [(ngModel)]="selectedYear" (change)="filterSerie(selectedYear)">
+            <select [(ngModel)]="selectedYear" (change)="getSeries()" class="dark-gray">
         <option  [value]="''" selected="selected">Not set</option>
         <option *ngFor="let year of years;" [value]="year">{{year}}</option>
       </select>
         </div>
     </div>
-    <div class="flex" style="flex-wrap:wrap;">
+    <div class="flex card-content">
         <div class="card card-series flex" *ngFor="let serie of series; let i = index;" style="flex-direction:row;">
             <app-serie-card [serie]="serie"></app-serie-card>
         </div>
-      <div class="class" style="margin-left:20px;" *ngIf="series.length < 1">
+      <div class="class dark-gray" style="margin-left:60px;" *ngIf="series.length < 1">
         <h1>
          Sorry no movies were found related to these criterias
         </h1>
       </div>
+    </div>
+    <div class="paginator" style="padding:20px">
+      <span class="card pointer" (click)="changePage(page)" *ngFor="let page of pages;">{{page}}</span>
     </div>
 </div>

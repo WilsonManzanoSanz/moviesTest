@@ -14,8 +14,10 @@ export class FavoritesService {
   }
   
   addMovieFavorite(newFavorite){
-    this.movies = [...this.movies, ...newFavorite];
-    return this.movies;
+    const isRepeated = this.movies.filter(value => value.id === newFavorite.id);
+    if(this.movies.length === 0 || isRepeated.length < 1){
+       this.movies = [...this.movies, ...newFavorite];
+    }
   }
   
   removeMovieFavorite(idx){
@@ -27,7 +29,10 @@ export class FavoritesService {
   }
   
   addSerieFavorite(newFavorite){
-    this.series = [...this.series, ...newFavorite];
+    const isRepeated = this.series.filter(value => value.id === newFavorite.id);
+    if(this.series.length === 0 || isRepeated.length < 1){
+       this.series = [...this.series, ...newFavorite];
+    }
     return this.series;
   }
   
