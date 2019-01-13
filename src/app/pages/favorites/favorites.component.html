@@ -1,8 +1,17 @@
-<div class="container flex">
-    <div class="card card-movies flex" *ngFor="let movie of movies; let i = index;" style="flex-direction:row;">
-        <app-movie-card [movie]="movie"></app-movie-card>
+<div class="container">
+   <div class="flex card-content">
+      <div class="card card-movies flex" *ngFor="let movie of movies; let i = index;" style="flex-direction:row;">
+          <app-movie-card [movie]="movie"></app-movie-card>
+      </div>
+  </div>
+   <div class="flex card-content">
+      <div class="card card-movies flex" *ngFor="let serie of series; let i = index;" style="flex-direction:row;">
+          <app-serie-card [serie]="serie"></app-serie-card>
+      </div>
     </div>
-    <div class="card card-movies flex" *ngFor="let serie of series; let i = index;" style="flex-direction:row;">
-        <app-serie-card [serie]="serie"></app-serie-card>
-    </div>
+  <div class="flex" *ngIf="series.length < 1 && movies.length < 1">
+     <h1 style="margin-left:20px;">
+       No favorites found
+    </h1>
+  </div>
 </div>

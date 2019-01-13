@@ -15,9 +15,12 @@ export class MoviesComponent implements OnInit {
   public years = [];
   public genres = [];
   public movies = [];
-  public selectedGenre;
-  public selectedYear;
+  public selectedGenre = '';
+  public selectedYear= '';
   public searchQuery;
+  public actualPage:number;
+  public lastPage:number;
+  public pages:any[] = [];
   public searchTerms = new Subject<string>();
   
   constructor(private movieService: MovieService) {
@@ -48,14 +51,38 @@ export class MoviesComponent implements OnInit {
     );
   }
   
-  getMovies(){
-    this.movieService.getMovies().subscribe(
+  getMovies(page = 1, genre = '', year = ''){
+    this.movieService.getMovies(page, genre, year).subscribe(
       response => {
         this.movies = response['results'];
+        this.actualPage = response.page;
+        this.lastPage = response.total_pages;
+        this.addPages();
       },
       error => console.error(error)); 
   }
-
+  
+  addPages(){
+    this.pages = [this.actualPage];
+    for (let i = this.actualPage; i > 1 && i < this.actualPage-4; i--){
+      this.pages.push(this.actualPage - i);
+    }
+    for (let i = 1; i <  5 && i < this.lastPage;i++){
+      this.pages.push(this.actualPage + i);
+    }
+    if(this.pages[0]!== 1){
+      this.pages.unshift(1); 
+    }
+    this.pages.push(this.lastPage);
+  }
+  
+  changePage(idx){
+    if(this.searchQuery === ''){
+      this.getMovies()
+    }
+  }
+  
+  /*
   filterMovie(value){
     this.searchQuery = '';
     this.movieService.getMovies(this.selectedGenre, this.selectedYear).subscribe(
@@ -64,17 +91,15 @@ export class MoviesComponent implements OnInit {
       },
       error => console.error(error)); 
   }
-  
+  */
   getYears(){
     this.years = this.movieService.getYears();
   }
   
   getGenres(){
-    console.log('hello')
     this.movieService.getGenres().subscribe(
     response => {
       this.genres = response.genres;
-      console.log(response);
     }, error => console.error(error));
   }
   

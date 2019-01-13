@@ -44,4 +44,8 @@ export class SerieService {
       return this.getSeries();
     }
   }
+  
+  getVideo(id){
+    return this.http.get<any>(`${environment.base_api}tv/${id}/videos`, {params: this.params});
+  }
 }

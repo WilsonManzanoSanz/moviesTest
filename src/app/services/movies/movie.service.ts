@@ -18,7 +18,7 @@ export class MovieService {
                  '2017', '2018'];
   
   constructor(private http: HttpClient) { 
-    this.params = new HttpParams().set('include_video','true');
+    this.params = new HttpParams();
   }
   
   getMovies(genre:string = '', year:string=''){
@@ -43,5 +43,9 @@ export class MovieService {
     else {
       return this.getMovies();
     }
+  }
+  
+  getVideo(id){
+    return this.http.get<any>(`${environment.base_api}movie/${id}/videos`, {params: this.params});
   }
 }

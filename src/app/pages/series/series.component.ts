@@ -15,8 +15,8 @@ export class SeriesComponent implements OnInit {
   public years = [];
   public genres = [];
   public series = [];
-  public selectedGenre;
-  public selectedYear;
+  public selectedGenre = '';
+  public selectedYear = '';
   public searchQuery;
   public searchTerms = new Subject<string>();
   

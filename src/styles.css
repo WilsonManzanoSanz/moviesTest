@@ -12,6 +12,13 @@
 html {
     height: 100%;
     width: 100%;
+    display:flex;
+}
+
+app-root {
+  width: 100%;
+  max-width:100%;
+  overflow-x:hidden;
 }
 
 body {
@@ -20,6 +27,7 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    display:flex;
 }
 
 .flex {
@@ -154,6 +162,11 @@ button.raised {
     margin: 20px;
     padding: 0px;
 }
+.card-series {
+    width: 45%;
+    margin: 20px;
+    padding: 0px;
+}
 
 .card-content {
     flex-wrap: wrap;
@@ -164,9 +177,38 @@ button.raised {
     width: 150px;
 }
 
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+    overflow-y: hidden;
+}
+
+
+
 @media only screen and (max-width: 700px) {
     .card-movies {
         width: 98%;
+    }
+  .card-series {
+        width: 98%;
+    }
+    .card-content {
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+}
+
+@media only screen and (min-width: 701px) and (max-width: 900px) {
+    .card-movies {
+        width: 35%;
+    }
+  .card-series {
+        width: 35%;
     }
     .card-content {
         flex-wrap: wrap;
