@@ -92,7 +92,7 @@ export class SeriesComponent implements OnInit {
     this.lastPage = response.total_pages;
     this.pages = [this.actualPage];
     let x = 0;
-    for (let i = this.actualPage-1; i > 1 && x < 4; i--){
+    for (let i = this.actualPage-1; i > 1 && x < 3; i--){
       x++;
       this.pages.push(i);
     }

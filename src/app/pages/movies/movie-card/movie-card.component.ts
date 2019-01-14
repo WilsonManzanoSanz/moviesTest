@@ -18,7 +18,7 @@ export class MovieCardComponent implements OnInit {
   @Input() movie:any;
   showTrailer:boolean = false;
   selectedFavorite: boolean = false;
-  videoLink:any;
+  videoLink:any = false;
   isMobile = window.matchMedia( "(max-width: 1025px)" );
 
   constructor(private favoriteService:FavoritesService, public domSanitizer:DomSanitizer, private movieService:MovieService ) { }

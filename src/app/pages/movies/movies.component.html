@@ -8,18 +8,18 @@
     <div class="flex" style="margin-left: 60px;">
         <div>
             <div>
-                <span class="dark-gray" >Genre</span>
+                <span class="dark-gray">Genre</span>
             </div>
-            <select [(ngModel)]="selectedGenre" (change)="getMovies()" class="dark-gray" >
+            <select [(ngModel)]="selectedGenre" (change)="getMovies()" class="dark-gray">
         <option [value]="''" selected="selected">Not set</option>
         <option *ngFor="let genre of genres;" [value]="genre.id">{{genre.name}}</option>
       </select>
         </div>
         <div>
             <div>
-                <span class="dark-gray" >Year</span>
+                <span class="dark-gray">Year</span>
             </div>
-            <select [(ngModel)]="selectedYear" (change)="getMovies()" class="dark-gray" >
+            <select [(ngModel)]="selectedYear" (change)="getMovies()" class="dark-gray">
         <option  [value]="''" selected="selected">Not set</option>
         <option *ngFor="let year of years;" [value]="year">{{year}}</option>
       </select>
@@ -30,12 +30,12 @@
             <app-movie-card [movie]="movie"></app-movie-card>
         </div>
         <div class="class dark-gray" style="margin-left:60px;" *ngIf="movies.length < 1">
-          <h1>
-           Sorry no movies were found related to these criterias
-          </h1>
+            <h1>
+                Sorry no movies were found related to these criterias
+            </h1>
         </div>
     </div>
     <div class="paginator" style="padding:20px">
-      <span class="card pointer" (click)="changePage(page)" *ngFor="let page of pages;">{{page}}</span>
+        <span class="card pointer card-paginator" (click)="changePage(page)" *ngFor="let page of pages;">{{page}}</span>
     </div>
 </div>

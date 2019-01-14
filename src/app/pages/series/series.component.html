@@ -17,7 +17,7 @@
         </div>
         <div>
             <div>
-               <span class="dark-gray">Year</span>
+                <span class="dark-gray">Year</span>
             </div>
             <select [(ngModel)]="selectedYear" (change)="getSeries()" class="dark-gray">
         <option  [value]="''" selected="selected">Not set</option>
@@ -29,13 +29,13 @@
         <div class="card card-series flex" *ngFor="let serie of series; let i = index;" style="flex-direction:row;">
             <app-serie-card [serie]="serie"></app-serie-card>
         </div>
-      <div class="class dark-gray" style="margin-left:60px;" *ngIf="series.length < 1">
-        <h1>
-         Sorry no movies were found related to these criterias
-        </h1>
-      </div>
+        <div class="class dark-gray" style="margin-left:60px;" *ngIf="series.length < 1">
+            <h1>
+                Sorry no movies were found related to these criterias
+            </h1>
+        </div>
     </div>
     <div class="paginator" style="padding:20px">
-      <span class="card pointer" (click)="changePage(page)" *ngFor="let page of pages;">{{page}}</span>
+        <span class="card pointer card-paginator" (click)="changePage(page)" *ngFor="let page of pages;">{{page}}</span>
     </div>
 </div>
