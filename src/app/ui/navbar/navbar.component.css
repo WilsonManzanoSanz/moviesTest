@@ -1,38 +1,79 @@
-.icon{
-  width:30px;
-  height:30px;
-  display:inline-block;
+.icon {
+    width: 200px;
+    height: 80px;
+    margin-left: 60px;
+    display: inline-block;
 }
 
-.header-nav{
-  padding:10px;
-  font-size: 1.5em;
-  font-weight: 900;
-  display:inline-block;
+.menu-nav {
+    float: right;
+    padding: 25px 10px;
+    font-size: 2em;
+    color: rgb(0, 189, 255);
 }
 
-.tab{
-  padding:10px;
-  display:inline-block;
+.header-nav {
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: 900;
+    display: inline-block;
 }
 
-.active-link{
-  color:rgb(0,189,255);
-  border: none;
-  border-bottom: 1px solid rgb(0,189,255);
+.tab {
+    padding: 20px 0px 0px 0px;
+    display: inline-block;
+    /*font-weight: 580;*/
+    font-size: 1.2em;
+    margin: 10px 15px 20px 15px;
 }
 
-@media only screen and (max-width: 700px) {
-  .spacer{
-    display:none;
-  }
-  .tab{
-    width:100%;
-  }
-  .navbar{
-    flex-direction: column;
-  }
-  span {
-    text-align: center;
-  }
+.gray {
+    color: rgb(161, 180, 188)
+}
+
+.main-color {
+    color: rgb(10, 191, 254)
+}
+
+.last-tap {
+    margin-right: 40px;
+}
+
+.active-link {
+    color: rgb(0, 189, 255);
+    border: none;
+    border-bottom: 3px solid rgb(0, 189, 255);
+    padding-bottom: 10px;
+}
+
+.menu-nav {
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+    .icon {
+        margin-left: 0px;
+    }
+    .main-nav {
+        text-align: left;
+        margin-left: 20px;
+    }
+    .spacer {
+        display: none;
+    }
+    .tab {
+        width: 100%;
+    }
+    .center {
+        text-align: center;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+    .menu-nav {
+        display: block;
+    }
+    #nav-right {
+        transition-delay: 1s;
+    }
 }

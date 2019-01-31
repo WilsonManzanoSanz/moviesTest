@@ -72,7 +72,7 @@ export class MoviesComponent implements OnInit {
     }
     this.pages.reverse();
     let y = this.actualPage;
-    for (let i = 1; i <  4 && y < this.lastPage;i++){
+    for (let i = 1; i <  3 && y < this.lastPage;i++){
       y++;
       this.pages.push(this.actualPage + i);
     }

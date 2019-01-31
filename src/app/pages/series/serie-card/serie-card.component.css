@@ -1,0 +1,40 @@
+.card {
+    padding: 0px;
+}
+
+.material-icons {
+    vertical-align: middle;
+    color: rgb(193, 201, 204);
+}
+
+.small-size {
+    font-size: 0.9em;
+}
+
+.button-favorite {
+    padding: 20px 10px
+}
+
+.text-description {
+    font-size: 0.9em;
+    margin-top: 25px
+}
+
+.final-button {
+    width: 75%;
+}
+
+@media only screen and (max-width: 900px) {
+    .button-favorite {
+        flex-flow: column;
+        height: 200px;
+        padding: 0px;
+    }
+    .text-description {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    .small-size {
+        margin-bottom: 5px;
+    }
+}

@@ -1,13 +1,16 @@
 <div class="flex navbar">
-  <span routerLink="/" class="pointer">
-    <!--<img src="https://ayudalos.info/assets/svg/icon.svg" class="icon">-->
-    <span class="main-color header-nav" style="margin-left:30px;">Showapp</span>
-  </span>
-  <div>
-    
-  </div>
-  <span class="spacer"></span>
-  <span class="tab pointer gray" routerLink="/movies" routerLinkActive="active-link">Movies</span>
-  <span class="tab pointer gray" routerLink="/series" routerLinkActive="active-link"> Series</span>
-  <span class="tab pointer gray" style="margin-right:40px;" routerLink="/favorites" routerLinkActive="active-link"> Favorites </span>
+    <span class="main-nav">
+    <img src="/assets/img/logoMovie.svg" class="icon" routerLink="/">
+    <i class="material-icons pointer menu-nav" (click)="toggleMenu()">menu</i>
+    <!--<span class="main-color header-nav" style="margin-left:30px;">Showapp</span>-->
+    </span>
+    <div>
+
+    </div>
+    <span class="spacer"></span>
+    <div id="nav-right" *ngIf="!isMobile">
+        <span class="tab pointer gray center" routerLink="/movies" routerLinkActive="active-link">Movies</span>
+        <span class="tab pointer gray center" routerLink="/series" routerLinkActive="active-link"> Series</span>
+        <span class="tab pointer gray last-tap center" routerLink="/favorites" routerLinkActive="active-link"> Favoritos </span>
+    </div>
 </div>
